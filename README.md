@@ -43,17 +43,17 @@ CineScope is a movie catalog web application for browsing, managing, and importi
 
 ## Screenshots
 
-![Application Screenshot](Screenshot.png)
+![Application Screenshot](CineScope/Screenshot.png)
 
-![Application Screenshot](Screenshot2.png)
+![Application Screenshot](CineScope/Screenshot2.png)
 
 ## Architecture Diagram
 
-![Architecture Diagram](Architectural%20Diagram.png)
+![Architecture Diagram](CineScope/Architectural%20Diagram.png)
 
 ## ER Diagram
 
-![ER Diagram](ER-Diagram.png)
+![ER Diagram](CineScope/ER-Diagram.png)
 
 ## How to use
 
