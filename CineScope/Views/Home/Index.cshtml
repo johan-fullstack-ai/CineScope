@@ -1,0 +1,51 @@
+﻿@model CineScope.Models.ViewModels.PagedMoviesDisplay
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to CineScope</h1>
+    <br><br>
+    <p>CineScope is a simple movie management application built with <strong>ASP.NET Core MVC</strong> and <strong>Entity Framework Core</strong>.</p>
+    <p>You can browse all available movies, view detailed information, and manage entries using the <strong>Movies</strong> section in the navigation bar. You can search TMDB database using the <strong>TMDB</strong> section and import a movie to Cinescope database.</p>
+</div>
+
+@if (Model.Movies.Count > 0)
+{
+    <div class="mt-5">
+        <h2>Trending Movies This Week</h2>
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 mt-2">
+            @foreach (var movie in Model.Movies)
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        @if (!string.IsNullOrWhiteSpace(movie.PosterUrl))
+                        {
+                            <img src="@movie.PosterUrl" class="card-img-top" alt="@movie.Title" />
+                        }
+                        else
+                        {
+                            <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 300px;">
+                                <span class="text-white">No Poster</span>
+                            </div>
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title">@movie.Title</h5>
+                            <p class="card-text">
+                                @if (!string.IsNullOrWhiteSpace(movie.ReleaseYear))
+                                {
+                                    <strong>Year:</strong> @movie.ReleaseYear<br />
+                                }
+                                @if (!string.IsNullOrWhiteSpace(movie.Rating))
+                                {
+                                    <strong>Rating:</strong> @movie.Rating<br />
+                                }
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+

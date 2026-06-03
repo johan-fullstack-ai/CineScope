@@ -1,0 +1,104 @@
+@model CineScope.Models.ViewModels.PagedMoviesDisplay
+@{
+    ViewData["Title"] = "Search TMDB";
+}
+
+<h2>Search</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<form method="get" asp-action="Search" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="query" class="form-control" placeholder="Search movies on TMDB by title" value="@Model.Query" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+@if (Model.Movies.Count > 0)
+{
+    <h3>Search Results</h3>
+    <div class="row">
+        @foreach (var movie in Model.Movies)
+        {
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="row g-0">
+                        <div class="col-md-2">
+                            @if (!string.IsNullOrWhiteSpace(movie.PosterUrl))
+                            {
+                                <img src="@movie.PosterUrl" class="img-fluid rounded-start" alt="@movie.Title" />
+                            }
+                            else
+                            {
+                                <div class="bg-secondary d-flex align-items-center justify-content-center rounded-start" style="height: 100%; min-height: 200px;">
+                                    <span class="text-white">No Poster</span>
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-10">
+                            <div class="card-body">
+                                <h5 class="card-title">@movie.Title</h5>
+                                <p class="card-text">
+                                    <strong>Year:</strong> @(movie.ReleaseYear ?? "N/A")<br />
+                                    <strong>Rating:</strong> @(movie.Rating ?? "N/A")<br />
+                                    <strong>Description:</strong> @(movie.Description ?? "No description available.")<br />
+                                </p>
+                                <form method="post" asp-action="Import" asp-route-id="@movie.TmdbId" class="d-inline">
+                                    <button type="submit" class="btn btn-success">Import</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (Model.Pagination.TotalPages > 1)
+    {
+        <nav aria-label="Search results pagination">
+            <ul class="pagination justify-content-center">
+                <li class="page-item @(!Model.Pagination.HasPrevious ? "disabled" : "")">
+                    <a class="page-link"
+                       href="@Url.Action("Search", new { query = Model.Query, page = Model.Pagination.PreviousPage })">Previous</a>
+                </li>
+
+                @foreach (var pageNumber in Model.Pagination.PageNumbers)
+                {
+                    <li class="page-item @(pageNumber == Model.Pagination.CurrentPage ? "active" : "")">
+                        <a class="page-link"
+                           href="@Url.Action("Search", new { query = Model.Query, page = pageNumber })">@pageNumber</a>
+                    </li>
+                }
+
+                <li class="page-item @(!Model.Pagination.HasNext ? "disabled" : "")">
+                    <a class="page-link"
+                       href="@Url.Action("Search", new { query = Model.Query, page = Model.Pagination.NextPage })">Next</a>
+                </li>
+            </ul>
+        </nav>
+
+        <p class="text-center">Page @Model.Pagination.CurrentPage of @Model.Pagination.TotalPages</p>
+    }
+}
+else if (!string.IsNullOrWhiteSpace(Model.Query))
+{
+    <div class="alert alert-info">
+        No results found for "@Model.Query".
+    </div>
+}
+

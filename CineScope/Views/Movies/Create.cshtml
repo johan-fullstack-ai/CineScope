@@ -1,0 +1,44 @@
+@model CineScope.Models.Movie
+
+@{
+    ViewData["Title"] = "Create Movie";
+}
+
+<h1>Create Movie</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post">
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Genre" class="form-label"></label>
+                <input asp-for="Genre" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="ReleaseYear" class="form-label"></label>
+                <input asp-for="ReleaseYear" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Rating" class="form-label"></label>
+                <input asp-for="Rating" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Duration" class="form-label"></label>
+                <input asp-for="Duration" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="PosterUrl" class="form-label"></label>
+                <input asp-for="PosterUrl" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Create</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>

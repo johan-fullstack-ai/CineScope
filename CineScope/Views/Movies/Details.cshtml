@@ -1,0 +1,57 @@
+@model CineScope.Models.Movie
+
+@{
+    ViewData["Title"] = "Movie Details";
+}
+
+<h1>@Model.Title</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        @if (!string.IsNullOrEmpty(Model.PosterUrl))
+        {
+            <img src="@Model.PosterUrl" class="img-fluid rounded" alt="Poster for @Model.Title" />
+        }
+    </div>
+    <div class="col-md-8">
+        <dl class="row">
+            <dt class="col-sm-4">Title</dt>
+            <dd class="col-sm-8">@Model.Title</dd>
+
+            <dt class="col-sm-4">Genre</dt>
+            <dd class="col-sm-8">@Model.Genre</dd>
+
+            <dt class="col-sm-4">Release Year</dt>
+            <dd class="col-sm-8">@Model.ReleaseYear</dd>
+
+            <dt class="col-sm-4">Rating</dt>
+            <dd class="col-sm-8">@Model.Rating</dd>
+
+            <dt class="col-sm-4">Duration (min)</dt>
+            <dd class="col-sm-8">@Model.Duration</dd>
+
+            <dt class="col-sm-4">Description</dt>
+            <dd class="col-sm-8">@Model.Description</dd>
+        </dl>
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            @if (ViewBag.IsFavorite)
+            {
+                <span class="badge bg-warning text-dark">★ Favorite</span>
+            }
+            <form asp-controller="Favorite" asp-action="Add" method="post" class="d-inline">
+                <input type="hidden" name="movieId" value="@Model.Id" />
+                <button type="submit" class="btn btn-success">Add to favorites</button>
+            </form>
+            <form asp-controller="Favorite" asp-action="Remove" method="post" class="d-inline">
+                <input type="hidden" name="movieId" value="@Model.Id" />
+                <button type="submit" class="btn btn-outline-danger">Remove from favorites</button>
+            </form>
+        }
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+        }
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
