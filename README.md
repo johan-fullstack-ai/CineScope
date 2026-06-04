@@ -55,6 +55,12 @@ CineScope is a movie catalog web application for browsing, managing, and importi
 
 ![ER Diagram](CineScope/ER-Diagram.png)
 
+## API architecture and roles
+
+CineScope uses a layered API architecture.
+All external data comes from TMDB through a dedicated IMovieClient service, which handles HTTP calls and maps external DTOs into the internal Movie model.
+Inside the app, the MVC controllers act as the internal API: public GET endpoints for browsing, authenticated POST endpoints for favorites, and admin‑protected endpoints for CRUD. EF Core forms the data API, with MyDbContext mediating all access to SQL Server. Finally, Identity wraps everything with authentication for members and a single explicit Admin role for protected operations.
+
 ## How to use
 
 First you can see the Trending movies (this week), on the Home page.
