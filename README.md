@@ -9,6 +9,7 @@ CineScope is a movie catalog web application for browsing, managing, and importi
 - [Screenshots](#screenshots)
 - [Architecture Diagram](#architecture-diagram)
 - [ER Diagram](#er-diagram)
+- [API architecture and roles](#api-architecture-and-roles)
 - [How to use](#how-to-use)
 - [Local setup](#local-setup)
 - [Azure deployment](#azure-deployment)
