@@ -30,6 +30,7 @@ CineScope is a movie catalog web application for browsing, managing, and importi
   - Trending movies
   - Search external database, with pagination
 - Authentication & Roles
+- Logged in users can favorite movies
 
   The home page displays trending movies from TMDB, while the Movies section uses the local SQL Server database managed through Entity Framework Core. The TMDB tab is used to search for and import movie data from TMDB.
 
@@ -66,7 +67,10 @@ Inside the app, the MVC controllers act as the internal API: public GET endpoint
 
 First you can see the Trending movies (this week), on the Home page.
 
-You can browse all available movies, view detailed information, and manage entries using the Movies section in the navigation bar. You can search TMDB database using the TMDB section and import a movie to Cinescope database.
+You can browse all available movies, view detailed information, and, as admin, manage entries using the Movies section in the navigation bar. You can search TMDB database using the TMDB section and, as admin, import a movie to Cinescope database. Logged in users can favorite movies in the details section.
+
+For a demo video, see CineScope project on my Portfolio:
+https://johan-fullstack-ai.github.io/Portfolio/projects
 
 ## Local setup
 
