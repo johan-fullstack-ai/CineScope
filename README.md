@@ -102,4 +102,4 @@ MVC structure, Controllers, Views, Models, EF Core and how to integrate an exter
 ## Credits
 
 - Project idea: Lexicon Syd
-- Developer: Johan
+- Developer: Johan Granvinge
